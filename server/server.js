@@ -12,30 +12,10 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI
 const jwtSecret = process.env.JWT_SECRET
-const corsOrigin = process.env.CORS_ORIGIN
-const normalizeOrigin = (origin) =>
-  typeof origin === 'string' ? origin.trim().replace(/\/+$/, '') : ''
-const allowedOrigins = corsOrigin
-  ? corsOrigin.split(',').map(normalizeOrigin).filter(Boolean)
-  : null
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!allowedOrigins?.length || !origin) {
-        return callback(null, true)
-      }
-
-      const normalizedRequestOrigin = normalizeOrigin(origin)
-
-      if (allowedOrigins.includes(normalizedRequestOrigin)) {
-        return callback(null, true)
-      }
-
-      return callback(new Error(`Origine non consentita dal CORS: ${origin}`))
-    }
-  })
-)
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true
+}))
 app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/clients', clientRoutes)
