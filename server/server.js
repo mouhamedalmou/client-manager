@@ -2,25 +2,37 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
+
 const authRoutes = require('./routes/auth')
 const clientRoutes = require('./routes/client')
-
 const authMiddleware = require('./middleware/auth')
-
 
 const app = express()
 const PORT = process.env.PORT || 3000
 const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI
 const jwtSecret = process.env.JWT_SECRET
-app.use(cors({
+
+const corsOptions = {
   origin: process.env.CORS_ORIGIN,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
-}))
+}
+
+app.use(cors(corsOptions))
+app.options(/.*/, cors(corsOptions))
+
 app.use(express.json())
+
 app.use('/api/auth', authRoutes)
 app.use('/api/clients', clientRoutes)
+
 app.get('/', (req, res) => {
   res.send('API funzionante 🚀')
+})
+
+app.get('/api/protected', authMiddleware, (req, res) => {
+  res.json({ message: 'Accesso autorizzato', user: req.user })
 })
 
 if (!mongoUri) {
@@ -42,6 +54,3 @@ mongoose.connect(mongoUri)
     console.error('Connessione a MongoDB fallita:', err.message)
     process.exit(1)
   })
-app.get('/api/protected', authMiddleware, (req, res) => {
-  res.json({ message: 'Accesso autorizzato', user: req.user })
-})
