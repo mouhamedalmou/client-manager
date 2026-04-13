@@ -4,6 +4,18 @@ const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'https://client-manager-btr2.onrender.com/api'
 })
 
+export const getApiErrorMessage = (error, fallbackMessage) => {
+  if (error.response?.data?.message) {
+    return error.response.data.message
+  }
+
+  if (error.request) {
+    return 'Impossibile raggiungere il server. Controlla VITE_API_URL su Vercel e CORS_ORIGIN su Render.'
+  }
+
+  return fallbackMessage
+}
+
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem('token')
   if (token) {

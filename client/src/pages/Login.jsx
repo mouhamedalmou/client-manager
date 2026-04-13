@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { loginUser, resendVerificationEmail } from '../services/api'
+import { getApiErrorMessage, loginUser, resendVerificationEmail } from '../services/api'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ export default function Login() {
         setCanResendVerification(Boolean(email))
       }
 
-      setError(err.response?.data?.message || 'Login fallito. Controlla le credenziali.')
+      setError(getApiErrorMessage(err, 'Login fallito. Controlla le credenziali.'))
     } finally {
       setIsSubmitting(false)
     }
@@ -58,7 +58,7 @@ export default function Login() {
       setSuccess(res.data.message)
       setCanResendVerification(false)
     } catch (err) {
-      setError(err.response?.data?.message || 'Reinvio email non riuscito.')
+      setError(getApiErrorMessage(err, 'Reinvio email non riuscito.'))
     } finally {
       setIsResending(false)
     }

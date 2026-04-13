@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { verifyEmailToken } from '../services/api'
+import { getApiErrorMessage, verifyEmailToken } from '../services/api'
 
 export default function VerifyEmail() {
   const [searchParams] = useSearchParams()
@@ -23,7 +23,7 @@ export default function VerifyEmail() {
         setMessage(res.data.message)
       } catch (err) {
         setStatus('error')
-        setMessage(err.response?.data?.message || 'Verifica email non riuscita.')
+        setMessage(getApiErrorMessage(err, 'Verifica email non riuscita.'))
       }
     }
 

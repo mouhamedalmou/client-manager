@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { registerUser } from '../services/api'
+import { getApiErrorMessage, registerUser } from '../services/api'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -40,7 +40,7 @@ export default function Register() {
         }
       })
     } catch (err) {
-      setError(err.response?.data?.message || 'Registrazione fallita. Riprova.')
+      setError(getApiErrorMessage(err, 'Registrazione fallita. Riprova.'))
     } finally {
       setIsSubmitting(false)
     }
