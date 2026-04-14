@@ -120,7 +120,6 @@ Ho sviluppato una web app full-stack per la gestione clienti con autenticazione 
 - Live demo: https://client-manager-1-stfo.onrender.com
 
 ## Note
-
-- `node_modules` e i file `.env` non vanno committati nel repository
-- il backend usa environment variables per i segreti
-- il progetto e pensato come portfolio project full-stack pronto da mostrare online
+- `node_modules` e i file `.env` non devono essere inclusi nel repository
+- Il backend utilizza variabili d’ambiente per gestire segreti e configurazioni
+- Il progetto è stato realizzato come portfolio full-stack pronto per essere mostrato online
