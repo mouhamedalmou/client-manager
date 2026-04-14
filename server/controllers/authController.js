@@ -124,12 +124,12 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) return res.status(401).json({ message: 'Credenziali non valide' })
 
-    // if (!user.isVerified) {
-    //   return res.status(403).json({
-    //     message: 'Verifica la tua email prima di accedere.',
-    //     code: 'EMAIL_NOT_VERIFIED'
-    //   })
-    // }
+    if (!user.isVerified) {
+      return res.status(403).json({
+        message: 'Verifica la tua email prima di accedere.',
+        code: 'EMAIL_NOT_VERIFIED'
+      })
+    }
 
     const jwtSecret = process.env.JWT_SECRET
     if (!jwtSecret) {
