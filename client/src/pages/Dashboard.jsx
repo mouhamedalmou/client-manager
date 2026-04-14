@@ -181,9 +181,7 @@ export default function Dashboard() {
                 <h2 className="text-xl font-bold text-white">
                   {editingId ? 'Modifica cliente' : 'Nuovo cliente'}
                 </h2>
-                <p className="mt-1 text-sm text-slate-400">
-                  Compila il form per usare `POST` o `PUT`.
-                </p>
+                
               </div>
 
               {editingId && (
@@ -299,9 +297,7 @@ export default function Dashboard() {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-xl font-bold text-white">Elenco clienti</h2>
-                <p className="mt-1 text-sm text-slate-400">
-                  Lista caricata con `GET /api/clients`.
-                </p>
+               
               </div>
               <div className="rounded-2xl border border-slate-800 bg-slate-950 px-3 py-2 text-sm text-slate-300">
                 Totale: {clients.length}
