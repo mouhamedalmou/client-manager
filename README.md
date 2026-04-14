@@ -1,3 +1,4 @@
+![Anteprima progetto](./screenshots/Screenshot%202026-04-14%20152045.png)
 # Client Manager
 
 Web app full-stack per la gestione clienti con autenticazione JWT, dashboard CRUD e deploy online.
