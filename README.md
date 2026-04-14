@@ -113,13 +113,8 @@ VITE_API_URL=http://localhost:3000/api
 - `PUT /api/clients/:id`
 - `DELETE /api/clients/:id`
 
-## Testo Per CV O Profilo Freelance
 
-Puoi usare una descrizione come questa:
-
-> Ho sviluppato una web app full-stack per la gestione clienti con autenticazione JWT, backend Express/MongoDB e frontend React deployato online. L'app include login, registrazione, dashboard CRUD per i clienti e integrazione completa tra frontend e API REST.
-
-Puoi inserire anche:
+Ho sviluppato una web app full-stack per la gestione clienti con autenticazione JWT, backend Express/MongoDB e frontend React deployato online. L'app include login, registrazione, dashboard CRUD per i clienti e integrazione completa tra frontend e API REST.
 
 - GitHub: https://github.com/mouhamedalmou/client-manager
 - Live demo: https://client-manager-1-stfo.onrender.com
