@@ -10,8 +10,8 @@ Web app full-stack per la gestione clienti con autenticazione JWT, dashboard CRU
 - GitHub: https://github.com/mouhamedalmou/client-manager
 
 ## Screenshot
-![Anteprima progetto](./screenshots/Screenshot%202026-04-14%20152045.png)
-
+![Anteprima progetto](./screenshots/dashboard.png)
+>
 
 
 ## Funzioni Del Progetto
