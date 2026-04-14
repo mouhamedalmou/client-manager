@@ -58,13 +58,13 @@ export default function Register() {
               Crea il tuo account e inizia a gestire i clienti.
             </h1>
             <p className="mt-4 max-w-sm text-base text-cyan-50/85">
-              La registrazione usa la rotta `POST /api/auth/register` gia esposta dal backend.
+              La registrazione attiva subito l&apos;account e blocca le email duplicate.
             </p>
           </div>
           <div className="rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur">
             <p className="text-sm text-cyan-50/90">Primo accesso</p>
             <p className="mt-2 text-lg font-semibold text-white">
-              Crea l&apos;utente e poi accedi alla dashboard.
+              Crea l&apos;utente e poi fai login direttamente.
             </p>
           </div>
         </div>

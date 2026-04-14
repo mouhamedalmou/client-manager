@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { getApiErrorMessage, loginUser, resendVerificationEmail } from '../services/api'
+import { getApiErrorMessage, loginUser } from '../services/api'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -10,8 +10,6 @@ export default function Login() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(location.state?.message || '')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isResending, setIsResending] = useState(false)
-  const [canResendVerification, setCanResendVerification] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -30,7 +28,6 @@ export default function Login() {
     event.preventDefault()
     setError('')
     setSuccess('')
-    setCanResendVerification(false)
     setIsSubmitting(true)
 
     try {
@@ -38,29 +35,9 @@ export default function Login() {
       localStorage.setItem('token', res.data.token)
       navigate('/dashboard', { replace: true })
     } catch (err) {
-      if (err.response?.data?.code === 'EMAIL_NOT_VERIFIED') {
-        setCanResendVerification(Boolean(email))
-      }
-
       setError(getApiErrorMessage(err, 'Login fallito. Controlla le credenziali.'))
     } finally {
       setIsSubmitting(false)
-    }
-  }
-
-  const handleResendVerification = async () => {
-    setError('')
-    setSuccess('')
-    setIsResending(true)
-
-    try {
-      const res = await resendVerificationEmail({ email })
-      setSuccess(res.data.message)
-      setCanResendVerification(false)
-    } catch (err) {
-      setError(getApiErrorMessage(err, 'Reinvio email non riuscito.'))
-    } finally {
-      setIsResending(false)
     }
   }
 
@@ -126,17 +103,6 @@ export default function Login() {
               <div className="mt-5 rounded-2xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
                 {error}
               </div>
-            )}
-
-            {canResendVerification && (
-              <button
-                className="mt-4 w-full rounded-2xl border border-cyan-500/40 px-4 py-3 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300 hover:bg-cyan-500/10 disabled:cursor-not-allowed disabled:opacity-70"
-                disabled={isResending}
-                onClick={handleResendVerification}
-                type="button"
-              >
-                {isResending ? 'Invio email in corso...' : 'Invia di nuovo email di verifica'}
-              </button>
             )}
 
             {success && (
